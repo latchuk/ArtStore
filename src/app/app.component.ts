@@ -16,30 +16,30 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
 
-    const documento = await this.firestore.collection('produtos')
-      .doc('JdDszidbeK0wvJnryaP9')
-      .get()
-      .toPromise();
+    // const documento = await this.firestore.collection('produtos')
+    //   .doc('JdDszidbeK0wvJnryaP9')
+    //   .get()
+    //   .toPromise();
 
-    const produto = {
-      id: documento.id,
-      ...documento.data()
-    } as Produto;
+    // const produto = {
+    //   id: documento.id,
+    //   ...documento.data()
+    // } as Produto;
 
-    console.log(produto);
+    // console.log(produto);
 
-    const documentoEstilo = await this.firestore.collection('estilos')
-      .doc(produto.idEstilo)
-      .get()
-      .toPromise();
+    // const documentoEstilo = await this.firestore.collection('estilos')
+    //   .doc(produto.idEstilo)
+    //   .get()
+    //   .toPromise();
 
-    const estilo = {
-      id: documentoEstilo.id,
-      ...documentoEstilo.data()
-    } as Estilo;
+    // const estilo = {
+    //   id: documentoEstilo.id,
+    //   ...documentoEstilo.data()
+    // } as Estilo;
 
-    console.log('Nome do produto: ' + produto.nome);
-    console.log('Descrição do estilo: ' + estilo.descricao);
+    // console.log('Nome do produto: ' + produto.nome);
+    // console.log('Descrição do estilo: ' + estilo.descricao);
 
   }
 
