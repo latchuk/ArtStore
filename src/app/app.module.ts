@@ -20,16 +20,21 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+
 
 import { environment } from 'src/environments/environment';
 import { EdicaoEstiloComponent } from './edicao-estilo/edicao-estilo.component';
 import { CadastroEstiloComponent } from './cadastro-estilo/cadastro-estilo.component';
+import { CadastroProdutoComponent } from './cadastro-produto/cadastro-produto.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EdicaoEstiloComponent,
-    CadastroEstiloComponent
+    CadastroEstiloComponent,
+    CadastroProdutoComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +52,9 @@ import { CadastroEstiloComponent } from './cadastro-estilo/cadastro-estilo.compo
     MatButtonModule,
     MatCardModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatSelectModule
 
   ],
   providers: [],
