@@ -7,6 +7,7 @@ import { CadastroSuperficieComponent } from './cadastro-superficie/cadastro-supe
 import { CadastroTamanhoComponent } from './cadastro-tamanho/cadastro-tamanho.component';
 import { CadastroTecnicaComponent } from './cadastro-tecnica/cadastro-tecnica.component';
 import { CadastroTemaComponent } from './cadastro-tema/cadastro-tema.component';
+import { EdicaoProdutoComponent } from './edicao-produto/edicao-produto.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: 'produtos/cadastro', component: CadastroProdutoComponent },
 
     { path: 'estilos/:id/edicao', component: EdicaoEstiloComponent },
+    { path: 'produtos/:id/edicao', component: EdicaoProdutoComponent },
 
 ];
 
