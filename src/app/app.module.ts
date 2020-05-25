@@ -1,5 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
+
+// Angular locale
+import localept from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localept, 'pt');
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,42 +27,56 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
-
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
 import { environment } from 'src/environments/environment';
 import { EdicaoEstiloComponent } from './edicao-estilo/edicao-estilo.component';
 import { CadastroEstiloComponent } from './cadastro-estilo/cadastro-estilo.component';
 import { CadastroProdutoComponent } from './cadastro-produto/cadastro-produto.component';
+import { CadastroSuperficieComponent } from './cadastro-superficie/cadastro-superficie.component';
+import { CadastroTamanhoComponent } from './cadastro-tamanho/cadastro-tamanho.component';
+import { CadastroTecnicaComponent } from './cadastro-tecnica/cadastro-tecnica.component';
+import { CadastroTemaComponent } from './cadastro-tema/cadastro-tema.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    EdicaoEstiloComponent,
-    CadastroEstiloComponent,
-    CadastroProdutoComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
+    declarations: [
+        AppComponent,
+        EdicaoEstiloComponent,
+        CadastroEstiloComponent,
+        CadastroProdutoComponent,
+        CadastroSuperficieComponent,
+        CadastroTamanhoComponent,
+        CadastroTecnicaComponent,
+        CadastroTemaComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
 
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFirestoreModule,
 
-    FormsModule,
-    ReactiveFormsModule,
+        FormsModule,
+        ReactiveFormsModule,
 
-    FlexLayoutModule,
+        FlexLayoutModule,
 
-    MatButtonModule,
-    MatCardModule,
-    MatInputModule,
-    MatIconModule,
-    MatProgressSpinnerModule,
-    MatSelectModule
+        MatButtonModule,
+        MatCardModule,
+        MatInputModule,
+        MatIconModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatDividerModule,
+        MatSnackBarModule
 
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    ],
+    providers: [
+        { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } },
+        { provide: LOCALE_ID, useValue: 'pt' }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

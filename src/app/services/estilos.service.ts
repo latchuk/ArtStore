@@ -4,38 +4,58 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class EstilosService {
 
-  constructor(private firestore: AngularFirestore) { }
+    constructor(private firestore: AngularFirestore) { }
 
-  getObservable(): Observable<Estilo[]> {
-    return this.firestore.collection<Estilo>('estilos').valueChanges({ idField: 'id' });
-  }
+    getObservable(): Observable<Estilo[]> {
+        return this.firestore.collection<Estilo>('estilos').valueChanges({ idField: 'id' });
+    }
 
-  async add(estilo: Estilo): Promise<Estilo> {
+    private convertToEstilo(document: firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData>): Estilo {
 
-    const docRef = await this.firestore.collection<Estilo>('estilos').add(estilo);
-    const doc = await docRef.get();
+        const dados = document.data();
 
-    return {
-      id: doc.id,
-      ...doc.data()
-    } as Estilo;
+        const estilo = {
+            id: document.id,
+            ...dados
+        } as Estilo;
 
-  }
+        if (dados.dataEdicao) {
+            estilo.dataEdicao = dados.dataEdicao.toDate();
+        }
 
-  async get(id: string): Promise<Estilo> {
+        if (dados.dataCadastro) {
+            estilo.dataCadastro = dados.dataCadastro.toDate();
+        }
 
-    const doc = await this.firestore.collection<Estilo>('estilos').doc(id).get().toPromise();
+        return estilo;
 
-    return {
-      id: doc.id,
-      ...doc.data()
-    } as Estilo;
+    }
 
-  }
+    async add(estilo: Estilo): Promise<Estilo> {
 
+        const documentRef = await this.firestore.collection<Estilo>('estilos').add(estilo);
+        const document = await documentRef.get();
+
+        return this.convertToEstilo(document);
+
+    }
+
+    async get(id: string): Promise<Estilo> {
+
+        const document = await this.firestore.collection<Estilo>('estilos').doc(id).get().toPromise();
+
+        return this.convertToEstilo(document);
+
+    }
+
+    async update(id: string, estilo: Estilo): Promise<void> {
+
+        await this.firestore.collection<Estilo>('estilos').doc(id).update(estilo);
+
+    }
 
 }

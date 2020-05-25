@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { EstilosService } from '../services/estilos.service';
-import { Estilo } from '../models/estilo.model';
 import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Location } from '@angular/common';
+import { Estilo } from '../models/estilo.model';
 
 @Component({
   selector: 'app-edicao-estilo',
@@ -11,23 +13,25 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EdicaoEstiloComponent implements OnInit {
 
+  idEstilo: string;
   estilo: Estilo;
 
   formulario = this.formBuilder.group({
     nome: ['', Validators.required]
   });
 
-  @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
-
   constructor(
     private formBuilder: FormBuilder,
     private estilosService: EstilosService,
-    private activedRoute: ActivatedRoute
+    private activedRoute: ActivatedRoute,
+    private snackBar: MatSnackBar,
+    private location: Location,
   ) { }
 
   async ngOnInit() {
-    const id = this.activedRoute.snapshot.paramMap.get('id');
-    this.estilo = await this.estilosService.get(id);
+
+    this.idEstilo = this.activedRoute.snapshot.paramMap.get('id');
+    this.estilo = await this.estilosService.get(this.idEstilo);
 
     this.formulario.patchValue(this.estilo);
 
@@ -35,18 +39,34 @@ export class EdicaoEstiloComponent implements OnInit {
 
   async submit() {
 
-    if (!this.formulario.valid) {
+    if (!this.formulario.valid || !this.estilo) {
       return;
     }
 
     this.formulario.disable();
 
-    // const estilo = this.formulario.value as Estilo;
-    // const estiloRetorno = await this.estilosService.add(estilo);
+    const estiloEditado = this.formulario.value as Estilo;
+    estiloEditado.dataEdicao = new Date();
+
+    await this.estilosService.update(this.idEstilo, estiloEditado);
+
+    console.log('Um estilo foi editado -------------------------');
+    console.log('Estilo:');
+    console.log(this.estilo);
+    console.log('Campos atualizados:');
+    console.log(estiloEditado);
+
+
+    Object.assign(this.estilo, estiloEditado);
 
     this.formulario.enable();
-    this.formGroupDirective.resetForm();
 
+    this.snackBar.open('Estilo atualizado com sucesso!');
+
+  }
+
+  voltar() {
+    this.location.back();
   }
 
 }

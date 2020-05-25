@@ -1,0 +1,87 @@
+<form (ngSubmit)="submit()" [formGroup]="formulario">
+
+    <mat-card>
+        <mat-card-header>
+
+            <div mat-card-avatar class="avatar" fxLayout fxLayoutAlign="center center">
+                <mat-icon>aspect_ratio</mat-icon>
+            </div>
+
+            <mat-card-title>Tamanho</mat-card-title>
+            <mat-card-subtitle>Cadastro de uma novo tamanho</mat-card-subtitle>
+
+        </mat-card-header>
+
+        <mat-card-content fxLayout="column">
+
+            <mat-form-field appearance="outline">
+                <mat-label>Nome</mat-label>
+                <input matInput formControlName="nome" name="nome">
+                <mat-error *ngIf="formulario.controls['nome'].hasError('required')">O nome é obrigatório</mat-error>
+            </mat-form-field>
+
+            <div fxLayout="row" fxLayoutAlign="space-between top" fxLayoutGap="8px">
+
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Largura</mat-label>
+                    <input matInput formControlName="largura" name="largura">
+
+                    <mat-icon matPrefix>border_horizontal</mat-icon>
+                    <span matSuffix>cm</span>
+
+                    <mat-error *ngIf="formulario.controls['largura'].hasError('required')">A largura é obrigatória
+                    </mat-error>
+                    <mat-error *ngIf="formulario.controls['largura'].hasError('number')">O número não é válido
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-icon class="icone-largura-altura">clear</mat-icon>
+
+                <mat-form-field appearance="outline" fxFlex>
+                    <mat-label>Altura</mat-label>
+                    <input matInput formControlName="altura" name="altura">
+
+                    <mat-icon matPrefix>border_vertical</mat-icon>
+                    <span matSuffix>cm</span>
+
+                    <mat-error *ngIf="formulario.controls['altura'].hasError('required')">A largura é obrigatória
+                    </mat-error>
+                    <mat-error *ngIf="formulario.controls['altura'].hasError('number')">O número não é válido
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+
+        </mat-card-content>
+
+        <mat-card-actions>
+
+            <div fxLayout="row">
+
+                <button mat-button color="accent" class="uppercase" type="button" (click)="voltar()"
+                    [disabled]="formulario.disabled">
+                    Voltar
+                </button>
+
+                <button mat-button color="accent" class="uppercase" type="reset" [disabled]="formulario.disabled">
+                    Limpar
+                </button>
+
+                <span fxFlex></span>
+
+                <div class="spinner-container" *ngIf="formulario.disabled">
+                    <mat-spinner strokeWidth="2" diameter="22"> </mat-spinner>
+                </div>
+
+                <button mat-flat-button color="primary" class="uppercase" type="submit"
+                    [disabled]="formulario.disabled">
+                    Salvar
+                </button>
+
+            </div>
+
+        </mat-card-actions>
+
+    </mat-card>
+
+</form>

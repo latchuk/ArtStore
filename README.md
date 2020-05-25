@@ -28,16 +28,14 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 
-## Parte - 2
+## Parte - 3
 
-0. Instalação do Angular Flex Layout para o auxílio no posicionamento dos elementos HTML.
-2. Cadastro das entidades que serão relacionadas ao produto utilizando o FormBuilder como facilitador para a criação do FormGroup do formulário reativo. 
-Começar por uma apenas para exemplificar como deve funcionar.
-3. Edição das entidades que serão relacionadas ao produto, da mesma forma com que os cadastros foram feitos. 
-Começar por uma apenas para exemplificar como deve funcionar.
-4. Cadastro do produto relacionando as entidades envolvidas à ele. Será utilizado Observables para a listagem dessas entidades e o cadastro deve ser feito da mesma forma com que os outros cadastro já foram feitos.
-5. Detalhes de um produto pela visão do administrador e manutenção das imagens desse produto. Adicionar e remover imagens existentes.
-
+0. Mostrar a utilização do SnackBar.
+1. Mostrar a utilização do Location para voltar a navegação.
+2. Mostrar a função convertToEstilo no Service.
+3. Mostrar como usar o Angular locale para deixar a aplicação em pt-BR.
+4. Mostrar a utilização de Pipes, em especial o pipe de data utilizado.
+5. Validação personalizada de números com vírgula.
 
 
 

@@ -1,6 +1,8 @@
 export class Tamanho {
   id: string;
-  descricao: string;
+  nome: string;
   largura: number;
   altura: number;
+  dataCadastro: Date;
+  dataEdicao: Date;
 }
