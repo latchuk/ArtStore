@@ -34,6 +34,8 @@
                 <mat-icon matPrefix>attach_money</mat-icon>
                 <mat-error *ngIf="formulario.controls['valor'].hasError('required')">O valor é obrigatório
                 </mat-error>
+                <mat-error *ngIf="formulario.controls['valor'].hasError('number')">O valor não é válido
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline">

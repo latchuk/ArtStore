@@ -7,66 +7,66 @@ import { Location } from '@angular/common';
 import { Estilo } from '../models/estilo.model';
 
 @Component({
-  selector: 'app-edicao-estilo',
-  templateUrl: './edicao-estilo.component.html',
-  styleUrls: ['./edicao-estilo.component.scss']
+    selector: 'app-edicao-estilo',
+    templateUrl: './edicao-estilo.component.html',
+    styleUrls: ['./edicao-estilo.component.scss']
 })
 export class EdicaoEstiloComponent implements OnInit {
 
-  idEstilo: string;
-  estilo: Estilo;
+    idEstilo: string;
+    estilo: Estilo;
 
-  formulario = this.formBuilder.group({
-    nome: ['', Validators.required]
-  });
+    formulario = this.formBuilder.group({
+        nome: ['', Validators.required]
+    });
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private estilosService: EstilosService,
-    private activedRoute: ActivatedRoute,
-    private snackBar: MatSnackBar,
-    private location: Location,
-  ) { }
+    constructor(
+        private formBuilder: FormBuilder,
+        private estilosService: EstilosService,
+        private activedRoute: ActivatedRoute,
+        private snackBar: MatSnackBar,
+        private location: Location,
+    ) { }
 
-  async ngOnInit() {
+    async ngOnInit() {
 
-    this.idEstilo = this.activedRoute.snapshot.paramMap.get('id');
-    this.estilo = await this.estilosService.get(this.idEstilo);
+        this.idEstilo = this.activedRoute.snapshot.paramMap.get('id');
+        this.estilo = await this.estilosService.get(this.idEstilo);
 
-    this.formulario.patchValue(this.estilo);
+        this.formulario.patchValue(this.estilo);
 
-  }
-
-  async submit() {
-
-    if (!this.formulario.valid || !this.estilo) {
-      return;
     }
 
-    this.formulario.disable();
+    async submit() {
 
-    const estiloEditado = this.formulario.value as Estilo;
-    estiloEditado.dataEdicao = new Date();
+        if (!this.formulario.valid || !this.estilo) {
+            return;
+        }
 
-    await this.estilosService.update(this.idEstilo, estiloEditado);
+        this.formulario.disable();
 
-    console.log('Um estilo foi editado -------------------------');
-    console.log('Estilo:');
-    console.log(this.estilo);
-    console.log('Campos atualizados:');
-    console.log(estiloEditado);
+        const estiloEditado = this.formulario.value as Estilo;
+        estiloEditado.dataEdicao = new Date();
+
+        await this.estilosService.update(this.idEstilo, estiloEditado);
+
+        console.log('Um estilo foi editado -------------------------');
+        console.log('Estilo:');
+        console.log(this.estilo);
+        console.log('Campos atualizados:');
+        console.log(estiloEditado);
 
 
-    Object.assign(this.estilo, estiloEditado);
+        Object.assign(this.estilo, estiloEditado);
 
-    this.formulario.enable();
+        this.formulario.enable();
 
-    this.snackBar.open('Estilo atualizado com sucesso!');
+        this.snackBar.open('Estilo atualizado com sucesso!');
 
-  }
+    }
 
-  voltar() {
-    this.location.back();
-  }
+    voltar() {
+        this.location.back();
+    }
 
 }
