@@ -39,6 +39,8 @@ import { CadastroTamanhoComponent } from './cadastro-tamanho/cadastro-tamanho.co
 import { CadastroTecnicaComponent } from './cadastro-tecnica/cadastro-tecnica.component';
 import { CadastroTemaComponent } from './cadastro-tema/cadastro-tema.component';
 import { EdicaoArteComponent } from './edicao-arte/edicao-arte.component';
+import { EdicaoListaImagensArteComponent } from './edicao-lista-imagens-arte/edicao-lista-imagens-arte.component';
+import { EdicaoImagemArteComponent } from './edicao-imagem-arte/edicao-imagem-arte.component';
 
 @NgModule({
     declarations: [
@@ -50,7 +52,9 @@ import { EdicaoArteComponent } from './edicao-arte/edicao-arte.component';
         CadastroTamanhoComponent,
         CadastroTecnicaComponent,
         CadastroTemaComponent,
-        EdicaoArteComponent
+        EdicaoArteComponent,
+        EdicaoListaImagensArteComponent,
+        EdicaoImagemArteComponent
     ],
     imports: [
         BrowserModule,

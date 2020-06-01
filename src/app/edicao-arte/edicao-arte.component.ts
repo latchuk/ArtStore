@@ -71,6 +71,8 @@ export class EdicaoArteComponent implements OnInit {
         this.idArte = this.activedRoute.snapshot.paramMap.get('id');
         this.arte = await this.artesService.get(this.idArte);
 
+        console.log(this.arte);
+
         this.formulario.patchValue(this.arte);
 
         this.formulario.enable();

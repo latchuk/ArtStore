@@ -8,7 +8,6 @@ export class Arte {
     valor: number;
 
     imagens: string[];
-    tags: string[];
 
     idEstilo: string; // Cubismo, Realismo, etc...
     idTamanho: string; // A4, A3, 30 x 25, etc...

@@ -8,6 +8,7 @@ import { CadastroTamanhoComponent } from './cadastro-tamanho/cadastro-tamanho.co
 import { CadastroTecnicaComponent } from './cadastro-tecnica/cadastro-tecnica.component';
 import { CadastroTemaComponent } from './cadastro-tema/cadastro-tema.component';
 import { EdicaoArteComponent } from './edicao-arte/edicao-arte.component';
+import { EdicaoListaImagensArteComponent } from './edicao-lista-imagens-arte/edicao-lista-imagens-arte.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
 
     { path: 'estilos/:id/edicao', component: EdicaoEstiloComponent },
     { path: 'artes/:id/edicao', component: EdicaoArteComponent },
+    { path: 'artes/:id/edicao/imagens', component: EdicaoListaImagensArteComponent },
 
 ];
 
