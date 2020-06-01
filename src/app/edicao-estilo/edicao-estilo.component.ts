@@ -30,10 +30,14 @@ export class EdicaoEstiloComponent implements OnInit {
 
     async ngOnInit() {
 
+        this.formulario.disable();
+
         this.idEstilo = this.activedRoute.snapshot.paramMap.get('id');
         this.estilo = await this.estilosService.get(this.idEstilo);
 
         this.formulario.patchValue(this.estilo);
+
+        this.formulario.enable();
 
     }
 

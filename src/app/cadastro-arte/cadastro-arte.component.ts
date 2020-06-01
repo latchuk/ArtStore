@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { EstilosService } from '../services/estilos.service';
 import { ArtesService } from '../services/artes.service';
@@ -16,17 +16,13 @@ import { Tamanho } from '../models/tamanho.model';
 import { Tecnica } from '../models/tecnica.model';
 import { Tema } from '../models/tema.model';
 import { CustomValidators } from '../validators/custom-validators';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'app-edicao-produto',
-    templateUrl: './edicao-produto.component.html',
-    styleUrls: ['./edicao-produto.component.scss']
+    selector: 'app-cadastro-arte',
+    templateUrl: './cadastro-arte.component.html',
+    styleUrls: ['./cadastro-arte.component.scss']
 })
-export class EdicaoProdutoComponent implements OnInit {
-
-    idProduto: string;
-    produto: Arte;
+export class CadastroArteComponent implements OnInit {
 
     temas: Observable<Tema[]>;
     estilos: Observable<Estilo[]>;
@@ -45,6 +41,8 @@ export class EdicaoProdutoComponent implements OnInit {
         idSuperficie: ['', Validators.required],
     });
 
+    @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
+
     constructor(
         private formBuilder: FormBuilder,
         private temasService: TemasService,
@@ -55,20 +53,14 @@ export class EdicaoProdutoComponent implements OnInit {
         private artesService: ArtesService,
         private snackBar: MatSnackBar,
         private location: Location,
-        private activedRoute: ActivatedRoute,
     ) { }
 
-    async ngOnInit() {
+    ngOnInit(): void {
         this.temas = this.temasService.getObservable();
         this.estilos = this.estilosService.getObservable();
         this.tecnicas = this.tecnicasService.getObservable();
         this.tamanhos = this.tamanhosService.getObservable();
         this.superficies = this.superficiesService.getObservable();
-
-        this.idProduto = this.activedRoute.snapshot.paramMap.get('id');
-        this.produto = await this.artesService.get(this.idProduto);
-
-        this.formulario.patchValue(this.produto);
     }
 
     async submit() {
@@ -79,22 +71,18 @@ export class EdicaoProdutoComponent implements OnInit {
 
         this.formulario.disable();
 
-        const arteEditada = this.formulario.value as Arte;
-        arteEditada.dataEdicao = new Date();
+        const novaArte = this.formulario.value as Arte;
+        novaArte.dataCadastro = new Date();
 
-        const arte = await this.artesService.update(this.idProduto, arteEditada);
+        const arte = await this.artesService.add(novaArte);
 
-        console.log('Um arte foi editada -------------------------');
-        console.log('Arte:');
-        console.log(this.produto);
-        console.log('Campos atualizados:');
-        console.log(arteEditada);
-
-        Object.assign(this.produto, arteEditada);
+        console.log('Uma nova arte foi salva ----------------------');
+        console.log(arte);
 
         this.formulario.enable();
+        this.formGroupDirective.resetForm();
 
-        this.snackBar.open('Arte atualizada com sucesso!');
+        this.snackBar.open('Nova arte cadastrada com sucesso!');
 
     }
 

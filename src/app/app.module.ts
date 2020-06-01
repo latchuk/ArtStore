@@ -33,24 +33,24 @@ import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/mater
 import { environment } from 'src/environments/environment';
 import { EdicaoEstiloComponent } from './edicao-estilo/edicao-estilo.component';
 import { CadastroEstiloComponent } from './cadastro-estilo/cadastro-estilo.component';
-import { CadastroProdutoComponent } from './cadastro-produto/cadastro-produto.component';
+import { CadastroArteComponent } from './cadastro-arte/cadastro-arte.component';
 import { CadastroSuperficieComponent } from './cadastro-superficie/cadastro-superficie.component';
 import { CadastroTamanhoComponent } from './cadastro-tamanho/cadastro-tamanho.component';
 import { CadastroTecnicaComponent } from './cadastro-tecnica/cadastro-tecnica.component';
 import { CadastroTemaComponent } from './cadastro-tema/cadastro-tema.component';
-import { EdicaoProdutoComponent } from './edicao-produto/edicao-produto.component';
+import { EdicaoArteComponent } from './edicao-arte/edicao-arte.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         EdicaoEstiloComponent,
         CadastroEstiloComponent,
-        CadastroProdutoComponent,
+        CadastroArteComponent,
         CadastroSuperficieComponent,
         CadastroTamanhoComponent,
         CadastroTecnicaComponent,
         CadastroTemaComponent,
-        EdicaoProdutoComponent
+        EdicaoArteComponent
     ],
     imports: [
         BrowserModule,
