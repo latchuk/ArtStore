@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ArtesService } from '../services/artes.service';
 import { ActivatedRoute } from '@angular/router';
+import { Arte } from '../models/arte.model';
 
 interface Imagem {
     url: string;
@@ -16,6 +17,7 @@ export class EdicaoListaImagensArteComponent implements OnInit {
 
     carregando: boolean;
     idArte: string;
+    arte: Arte;
     descricaoArte: string;
     imagens: Imagem[] = [];
 
@@ -30,13 +32,13 @@ export class EdicaoListaImagensArteComponent implements OnInit {
 
         this.idArte = this.actvitedRoute.snapshot.paramMap.get('id');
 
-        const arte = await this.artesService.get(this.idArte);
+        this.arte = await this.artesService.get(this.idArte);
 
-        this.descricaoArte = `${arte.nome} - ${arte.descricao}`;
+        this.descricaoArte = `${this.arte.nome} - ${this.arte.descricao}`;
 
-        if (arte.imagens) {
+        if (this.arte.imagens) {
 
-            this.imagens = arte.imagens.map<Imagem>(urlImagem => {
+            this.imagens = this.arte.imagens.map<Imagem>(urlImagem => {
                 return { url: urlImagem, arquivo: null };
             });
 
@@ -58,6 +60,16 @@ export class EdicaoListaImagensArteComponent implements OnInit {
 
         }
 
+    }
+
+    async atualizarImagens(url: string) {
+        console.log(url);
+
+        // this.arte.imagens = this.imagens.filter(x => x.url).map(x => x.url);
+
+        // console.log(this.arte);
+
+        // await this.artesService.update(this.idArte, this.arte);
     }
 
 }

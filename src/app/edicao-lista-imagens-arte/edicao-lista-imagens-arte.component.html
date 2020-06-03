@@ -21,7 +21,8 @@
                 <p>Essa arte ainda não possui nenhuma imagem</p>
             </div>
 
-            <app-edicao-imagem-arte *ngFor="let imagem of imagens">
+            <app-edicao-imagem-arte *ngFor="let imagem of imagens" [(url)]="imagem.url" [arquivo]="imagem.arquivo"
+                [idArte]="idArte" (fileUploded)="atualizarImagens($event)">
             </app-edicao-imagem-arte>
 
         </mat-card-content>

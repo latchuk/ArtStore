@@ -3,4 +3,11 @@
     width: 224px;
     height: 224px;
     margin: 4px;
+
+    img {
+        width: 224px;
+        height: 224px;
+        object-fit: cover;
+        position: absolute;
+    }
 }
