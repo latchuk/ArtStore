@@ -3,7 +3,7 @@ import { ArtesService } from '../services/artes.service';
 import { ActivatedRoute } from '@angular/router';
 import { Arte } from '../models/arte.model';
 
-interface Imagem {
+export class Imagem {
     url: string;
     arquivo: File;
 }
@@ -17,7 +17,6 @@ export class EdicaoListaImagensArteComponent implements OnInit {
 
     carregando: boolean;
     idArte: string;
-    arte: Arte;
     descricaoArte: string;
     imagens: Imagem[] = [];
 
@@ -32,13 +31,13 @@ export class EdicaoListaImagensArteComponent implements OnInit {
 
         this.idArte = this.actvitedRoute.snapshot.paramMap.get('id');
 
-        this.arte = await this.artesService.get(this.idArte);
+        const arte = await this.artesService.get(this.idArte);
 
-        this.descricaoArte = `${this.arte.nome} - ${this.arte.descricao}`;
+        this.descricaoArte = `${arte.nome} - ${arte.descricao}`;
 
-        if (this.arte.imagens) {
+        if (arte.imagens) {
 
-            this.imagens = this.arte.imagens.map<Imagem>(urlImagem => {
+            this.imagens = arte.imagens.map<Imagem>(urlImagem => {
                 return { url: urlImagem, arquivo: null };
             });
 
@@ -62,14 +61,13 @@ export class EdicaoListaImagensArteComponent implements OnInit {
 
     }
 
-    async atualizarImagens(url: string) {
-        console.log(url);
+    async atualizarImagens() {
 
-        // this.arte.imagens = this.imagens.filter(x => x.url).map(x => x.url);
+        const imagensArte = this.imagens.filter(x => x.url).map(x => x.url);
+        const arte = { imagens: imagensArte } as Arte;
 
-        // console.log(this.arte);
+        await this.artesService.update(this.idArte, arte);
 
-        // await this.artesService.update(this.idArte, this.arte);
     }
 
 }

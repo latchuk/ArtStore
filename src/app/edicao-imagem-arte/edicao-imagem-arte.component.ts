@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angu
 import { AngularFireStorage, AngularFireUploadTask, AngularFireStorageReference } from '@angular/fire/storage';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { Imagem } from '../edicao-lista-imagens-arte/edicao-lista-imagens-arte.component';
 
 @Component({
     selector: 'app-edicao-imagem-arte',
@@ -10,12 +11,16 @@ import { finalize } from 'rxjs/operators';
 })
 export class EdicaoImagemArteComponent implements OnInit, OnDestroy {
 
-    @Input() url: string;
-    @Input() arquivo: File;
+    @Input() imagem: Imagem;
+
+    // @Input() url: string;
+    // @Input() arquivo: File;
     @Input() idArte: string;
 
-    @Output() fileUploded: EventEmitter<string> = new EventEmitter();
+    @Output() fileUploded: EventEmitter<Imagem> = new EventEmitter();
 
+    enviando: boolean;
+    carregando: boolean;
     progressoEnvio: number;
 
     private fileReference: AngularFireStorageReference;
@@ -28,27 +33,37 @@ export class EdicaoImagemArteComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
 
-        if (this.url || !this.arquivo) {
-            return;
+        if (this.imagem.url) {
+
+            this.carregando = true;
+
+        } else {
+
+            if (!this.imagem.arquivo) {
+                return;
+            }
+
+            this.enviando = true;
+
+            const nome = `${this.idArte}_${new Date().getTime()}_${this.imagem.arquivo.name}`;
+
+            console.log(nome);
+            console.log('Iniciou o upload');
+
+            this.fileReference = this.fireStorage.ref(nome);
+            this.uploadTask = this.fireStorage.upload(nome, this.imagem.arquivo);
+
+            this.percentageChangesSubscription = this.uploadTask.percentageChanges()
+                .subscribe(x => {
+                    console.log(x);
+                    this.progressoEnvio = x;
+                });
+
+            this.snapshotChangesSubscription = this.uploadTask.snapshotChanges()
+                .pipe(finalize(() => this.uploadFinalizado()))
+                .subscribe();
+
         }
-
-        const nome = `${this.idArte}_${new Date().getTime()}_${this.arquivo.name}`;
-
-        console.log(nome);
-        console.log('Iniciou o upload');
-
-        this.fileReference = this.fireStorage.ref(nome);
-        this.uploadTask = this.fireStorage.upload(nome, this.arquivo);
-
-        this.percentageChangesSubscription = this.uploadTask.percentageChanges()
-            .subscribe(x => {
-                console.log(x);
-                this.progressoEnvio = x;
-            });
-
-        this.snapshotChangesSubscription = this.uploadTask.snapshotChanges()
-            .pipe(finalize(() => this.uploadFinalizado()))
-            .subscribe();
 
     }
 
@@ -68,13 +83,18 @@ export class EdicaoImagemArteComponent implements OnInit, OnDestroy {
 
     private async uploadFinalizado() {
 
+        this.enviando = false;
+        this.carregando = true;
+
         const url = await this.fileReference.getDownloadURL().toPromise();
 
-        this.url = url;
-        this.arquivo = null;
+        this.imagem.url = url;
 
-        this.fileUploded.emit(url);
+        this.fileUploded.emit(this.imagem);
 
     }
 
+    imagemCarregada() {
+        this.carregando = false;
+    }
 }
