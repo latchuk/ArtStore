@@ -12,12 +12,10 @@ import { Imagem } from '../edicao-lista-imagens-arte/edicao-lista-imagens-arte.c
 export class EdicaoImagemArteComponent implements OnInit, OnDestroy {
 
     @Input() imagem: Imagem;
-
-    // @Input() url: string;
-    // @Input() arquivo: File;
     @Input() idArte: string;
 
     @Output() fileUploded: EventEmitter<Imagem> = new EventEmitter();
+    @Output() fileDeleted: EventEmitter<Imagem> = new EventEmitter();
 
     enviando: boolean;
     carregando: boolean;
@@ -47,15 +45,11 @@ export class EdicaoImagemArteComponent implements OnInit, OnDestroy {
 
             const nome = `${this.idArte}_${new Date().getTime()}_${this.imagem.arquivo.name}`;
 
-            console.log(nome);
-            console.log('Iniciou o upload');
-
             this.fileReference = this.fireStorage.ref(nome);
             this.uploadTask = this.fireStorage.upload(nome, this.imagem.arquivo);
 
             this.percentageChangesSubscription = this.uploadTask.percentageChanges()
                 .subscribe(x => {
-                    console.log(x);
                     this.progressoEnvio = x;
                 });
 
@@ -69,7 +63,9 @@ export class EdicaoImagemArteComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
 
-        this.uploadTask.cancel();
+        if (this.uploadTask) {
+            this.uploadTask.cancel();
+        }
 
         if (this.percentageChangesSubscription) {
             this.percentageChangesSubscription.unsubscribe();
@@ -96,5 +92,16 @@ export class EdicaoImagemArteComponent implements OnInit, OnDestroy {
 
     imagemCarregada() {
         this.carregando = false;
+    }
+
+    async excluirImagem() {
+
+        const fileRef = this.fireStorage.storage.refFromURL(this.imagem.url);
+        await fileRef.delete();
+
+        this.imagem.url = null;
+
+        this.fileDeleted.emit(this.imagem);
+
     }
 }

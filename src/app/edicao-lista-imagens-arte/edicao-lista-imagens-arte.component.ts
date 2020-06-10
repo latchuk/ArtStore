@@ -37,6 +37,8 @@ export class EdicaoListaImagensArteComponent implements OnInit {
 
         if (arte.imagens) {
 
+            console.log(arte.imagens);
+
             this.imagens = arte.imagens.map<Imagem>(urlImagem => {
                 return { url: urlImagem, arquivo: null };
             });
@@ -61,13 +63,31 @@ export class EdicaoListaImagensArteComponent implements OnInit {
 
     }
 
+    imagemEnviada() {
+        this.atualizarImagens();
+    }
+
+    excluirImagem(imagem: Imagem) {
+
+        const indice = this.imagens.indexOf(imagem);
+        this.imagens.splice(indice, 1);
+
+        this.atualizarImagens();
+
+    }
+
     async atualizarImagens() {
 
         const imagensArte = this.imagens.filter(x => x.url).map(x => x.url);
+
+        console.log(imagensArte);
+
         const arte = { imagens: imagensArte } as Arte;
 
         await this.artesService.update(this.idArte, arte);
 
     }
+
+
 
 }
