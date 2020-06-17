@@ -9,10 +9,19 @@ import { CadastroTecnicaComponent } from './cadastro-tecnica/cadastro-tecnica.co
 import { CadastroTemaComponent } from './cadastro-tema/cadastro-tema.component';
 import { EdicaoArteComponent } from './edicao-arte/edicao-arte.component';
 import { EdicaoListaImagensArteComponent } from './edicao-lista-imagens-arte/edicao-lista-imagens-arte.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 
 
 const routes: Routes = [
 
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+
+    { path: 'home', component: HomeComponent },
+    { path: 'login', component: LoginComponent },
+
+    { path: 'usuarios/cadastro', component: CadastroUsuarioComponent },
     { path: 'estilos/cadastro', component: CadastroEstiloComponent },
     { path: 'superficies/cadastro', component: CadastroSuperficieComponent },
     { path: 'tamanhos/cadastro', component: CadastroTamanhoComponent },

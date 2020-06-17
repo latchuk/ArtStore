@@ -41,6 +41,9 @@ import { CadastroTemaComponent } from './cadastro-tema/cadastro-tema.component';
 import { EdicaoArteComponent } from './edicao-arte/edicao-arte.component';
 import { EdicaoListaImagensArteComponent } from './edicao-lista-imagens-arte/edicao-lista-imagens-arte.component';
 import { EdicaoImagemArteComponent } from './edicao-imagem-arte/edicao-imagem-arte.component';
+import { LoginComponent } from './login/login.component';
+import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
     declarations: [
@@ -54,7 +57,10 @@ import { EdicaoImagemArteComponent } from './edicao-imagem-arte/edicao-imagem-ar
         CadastroTemaComponent,
         EdicaoArteComponent,
         EdicaoListaImagensArteComponent,
-        EdicaoImagemArteComponent
+        EdicaoImagemArteComponent,
+        LoginComponent,
+        CadastroUsuarioComponent,
+        HomeComponent
     ],
     imports: [
         BrowserModule,
