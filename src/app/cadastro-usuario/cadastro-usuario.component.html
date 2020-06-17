@@ -40,6 +40,8 @@
                     obrigatória</mat-error>
             </mat-form-field>
 
+            <mat-error *ngIf="usuarioJaCadastrado">Usuário já cadastrado</mat-error>
+
         </mat-card-content>
 
         <mat-card-actions>

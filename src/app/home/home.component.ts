@@ -14,4 +14,9 @@ export class HomeComponent implements OnInit {
 
     }
 
+    async sair() {
+        await this.auth.signOut();
+    }
+
+
 }
