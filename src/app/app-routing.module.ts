@@ -12,26 +12,36 @@ import { EdicaoListaImagensArteComponent } from './edicao-lista-imagens-arte/edi
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
+import { ArtesComponent } from './artes/artes.component';
 
 
 const routes: Routes = [
 
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-
-    { path: 'home', component: HomeComponent },
     { path: 'login', component: LoginComponent },
-
     { path: 'usuarios/cadastro', component: CadastroUsuarioComponent },
-    { path: 'estilos/cadastro', component: CadastroEstiloComponent },
-    { path: 'superficies/cadastro', component: CadastroSuperficieComponent },
-    { path: 'tamanhos/cadastro', component: CadastroTamanhoComponent },
-    { path: 'tecnicas/cadastro', component: CadastroTecnicaComponent },
-    { path: 'temas/cadastro', component: CadastroTemaComponent },
-    { path: 'artes/cadastro', component: CadastroArteComponent },
+    {
+        path: 'home', component: HomeComponent,
+        children: [
 
-    { path: 'estilos/:id/edicao', component: EdicaoEstiloComponent },
-    { path: 'artes/:id/edicao', component: EdicaoArteComponent },
-    { path: 'artes/:id/edicao/imagens', component: EdicaoListaImagensArteComponent },
+            // { path: '', redirectTo: 'estilos/cadastro', pathMatch: 'full' },
+
+            { path: 'estilos/cadastro', component: CadastroEstiloComponent },
+            { path: 'superficies/cadastro', component: CadastroSuperficieComponent },
+            { path: 'tamanhos/cadastro', component: CadastroTamanhoComponent },
+            { path: 'tecnicas/cadastro', component: CadastroTecnicaComponent },
+            { path: 'temas/cadastro', component: CadastroTemaComponent },
+            { path: 'artes', component: ArtesComponent },
+            { path: 'artes/cadastro', component: CadastroArteComponent },
+
+            { path: 'estilos/:id/edicao', component: EdicaoEstiloComponent },
+            { path: 'artes/:id/edicao', component: EdicaoArteComponent },
+            { path: 'artes/:id/edicao/imagens', component: EdicaoListaImagensArteComponent },
+
+        ]
+    },
+
+
 
 ];
 

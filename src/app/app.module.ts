@@ -29,6 +29,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { environment } from 'src/environments/environment';
 import { EdicaoEstiloComponent } from './edicao-estilo/edicao-estilo.component';
@@ -44,6 +48,7 @@ import { EdicaoImagemArteComponent } from './edicao-imagem-arte/edicao-imagem-ar
 import { LoginComponent } from './login/login.component';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 import { HomeComponent } from './home/home.component';
+import { ArtesComponent } from './artes/artes.component';
 
 @NgModule({
     declarations: [
@@ -60,7 +65,8 @@ import { HomeComponent } from './home/home.component';
         EdicaoImagemArteComponent,
         LoginComponent,
         CadastroUsuarioComponent,
-        HomeComponent
+        HomeComponent,
+        ArtesComponent
     ],
     imports: [
         BrowserModule,
@@ -82,7 +88,11 @@ import { HomeComponent } from './home/home.component';
         MatProgressSpinnerModule,
         MatSelectModule,
         MatDividerModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatListModule,
+        MatCheckboxModule,
 
     ],
     providers: [

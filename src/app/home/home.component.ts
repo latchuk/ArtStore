@@ -8,10 +8,17 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class HomeComponent implements OnInit {
 
+    nomeUsuario: string;
+
     constructor(public auth: AngularFireAuth) { }
 
     async ngOnInit(): Promise<void> {
 
+        const usuario = await this.auth.user.toPromise();
+
+        if (usuario) {
+            this.nomeUsuario = usuario.email;
+        }
     }
 
     async sair() {

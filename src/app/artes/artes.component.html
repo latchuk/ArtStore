@@ -1,0 +1,57 @@
+<div class="container">
+
+    <div class="lista" fxLayout="row">
+
+        <div fxFlex="20">
+            <mat-list>
+
+                <mat-divider></mat-divider>
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon class="subheader-icon">palette</mat-icon>
+                    <div mat-subheader>Temas</div>
+                </div>
+
+                <mat-list-item *ngFor="let tema of temas | async">
+                    <mat-checkbox color="primary">{{tema.nome}}</mat-checkbox>
+                    <div fxFlex>
+                    </div>
+                    <button mat-icon-button color="accent">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </mat-list-item>
+
+                <mat-divider></mat-divider>
+
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon class="subheader-icon">palette</mat-icon>
+                    <div mat-subheader>Estilos</div>
+                </div>
+
+                <mat-list-item *ngFor="let estilo of estilos | async">
+                    <mat-checkbox color="primary">{{estilo.nome}}</mat-checkbox>
+                    <div fxFlex>
+                    </div>
+                    <button mat-icon-button color="accent" (click)="editarEstilo(estilo)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </mat-list-item>
+
+                <mat-divider></mat-divider>
+
+            </mat-list>
+
+        </div>
+
+        <div>
+            <!-- <p>produto</p>
+            <p>produto</p>
+            <p>produto</p>
+            <p>produto</p>
+            <p>produto</p> -->
+        </div>
+
+    </div>
+
+</div>
