@@ -1,13 +1,76 @@
+.fixed-fab {
+    right: 32px;
+    bottom: 32px;
+    left: auto;
+    position: fixed;
+}
+
 .container {
-    padding: 16px;
+    padding: 16px 32px;
 
     .lista {
-        max-width: 960px;
         margin: auto;
 
         .subheader-icon {
             padding: 16px 0 16px 16px;
             opacity: 0.54;
+        }
+
+        .artes {
+            padding-top: 8px;
+
+            // .mat-card-image {
+            //     margin-bottom: 0 !important;
+            // }
+
+            .imagem-arte {
+                height: 296px;
+                background-color: lightgray;
+                margin: -16px -16px 8px -16px;
+                border-top-left-radius: inherit;
+                border-top-right-radius: inherit;
+                position: relative;
+
+                img {
+                    border-top-left-radius: inherit;
+                    border-top-right-radius: inherit;
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .acoes {
+                    bottom: 0;
+                    position: absolute;
+                    color: white;
+                    width: 100%;
+                    padding-top: 32px;
+                    background: linear-gradient(
+                        45deg,
+                        rgba(0, 0, 0, 0.27) 0%,
+                        rgba(0, 0, 0, 0.27) 12%,
+                        rgba(0, 0, 0, 0) 19%,
+                        rgba(0, 0, 0, 0) 100%
+                    );
+                }
+            }
+        }
+
+        mat-card {
+            width: 296px;
+            margin-bottom: 16px;
+        }
+
+        mat-list-item {
+            button {
+                opacity: 0;
+            }
+
+            &:hover {
+                button {
+                    opacity: 1;
+                }
+            }
         }
     }
 }

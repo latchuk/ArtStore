@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { UsuariosService } from '../services/usuarios.service';
+import { Usuario } from '../models/usuario.model';
 
 @Component({
     selector: 'app-home',
@@ -8,17 +10,17 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class HomeComponent implements OnInit {
 
-    nomeUsuario: string;
+    usuario: Usuario;
 
-    constructor(public auth: AngularFireAuth) { }
+    constructor(
+        private auth: AngularFireAuth,
+        private usuariosService: UsuariosService,
+    ) { }
 
     async ngOnInit(): Promise<void> {
 
-        const usuario = await this.auth.user.toPromise();
+        this.usuario = await this.usuariosService.getUsuarioLogado();
 
-        if (usuario) {
-            this.nomeUsuario = usuario.email;
-        }
     }
 
     async sair() {

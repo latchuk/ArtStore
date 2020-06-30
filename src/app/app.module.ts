@@ -49,6 +49,7 @@ import { LoginComponent } from './login/login.component';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 import { HomeComponent } from './home/home.component';
 import { ArtesComponent } from './artes/artes.component';
+import { CarrinhoComponent } from './carrinho/carrinho.component';
 
 @NgModule({
     declarations: [
@@ -66,7 +67,8 @@ import { ArtesComponent } from './artes/artes.component';
         LoginComponent,
         CadastroUsuarioComponent,
         HomeComponent,
-        ArtesComponent
+        ArtesComponent,
+        CarrinhoComponent
     ],
     imports: [
         BrowserModule,

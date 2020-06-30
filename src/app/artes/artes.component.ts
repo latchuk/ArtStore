@@ -14,6 +14,8 @@ import { ArtesService } from '../services/artes.service';
 import { Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import { UsuariosService } from '../services/usuarios.service';
+import { Usuario } from '../models/usuario.model';
 
 @Component({
     selector: 'app-artes',
@@ -28,6 +30,7 @@ export class ArtesComponent implements OnInit {
     tamanhos: Observable<Tamanho[]>;
     superficies: Observable<Superficie[]>;
     artes: Observable<Superficie[]>;
+    usuario: Usuario;
 
     constructor(
         private router: Router,
@@ -37,10 +40,13 @@ export class ArtesComponent implements OnInit {
         private tamanhosService: TamanhosService,
         private superficiesService: SuperficiesService,
         private artesService: ArtesService,
-        private storage: AngularFireStorage
+        private usuariosService: UsuariosService
     ) { }
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
+
+        this.usuario = await this.usuariosService.getUsuarioLogado();
+
         this.temas = this.temasService.getObservable();
         this.estilos = this.estilosService.getObservable();
         this.tecnicas = this.tecnicasService.getObservable();
@@ -49,8 +55,17 @@ export class ArtesComponent implements OnInit {
         this.artes = this.artesService.getObservable();
     }
 
+    usuarioAdmin(): boolean {
+
+        if (this.usuario && this.usuario.permissao === 'admin') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     editarEstilo(estilo: Estilo) {
-        this.router.navigate([`home/estilos/${estilo.id}/edicao`]);
+        this.router.navigate([`/home/estilos/${estilo.id}/edicao`]);
     }
 
 }

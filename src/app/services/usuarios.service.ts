@@ -8,7 +8,10 @@ import { Usuario } from '../models/usuario.model';
 })
 export class UsuariosService {
 
-    constructor(private firestore: AngularFirestore, private auth: AngularFireAuth) { }
+    constructor(
+        private firestore: AngularFirestore,
+        private auth: AngularFireAuth
+    ) { }
 
     private convertToUsuario(document: firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData>): Usuario {
 
@@ -36,6 +39,27 @@ export class UsuariosService {
         const document = await this.firestore.collection<Usuario>('usuarios').doc(id).get().toPromise();
 
         return this.convertToUsuario(document);
+
+    }
+
+    async getUsuarioLogado(): Promise<Usuario> {
+
+        return new Promise<Usuario>(resolve => {
+
+            this.auth.user.subscribe(user => {
+
+
+
+                if (user) {
+                    const id = user.uid;
+                    resolve(this.get(id));
+                } else {
+                    resolve(null);
+                }
+
+            });
+
+        });
 
     }
 

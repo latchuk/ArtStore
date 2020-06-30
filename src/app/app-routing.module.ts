@@ -13,6 +13,9 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { CadastroUsuarioComponent } from './cadastro-usuario/cadastro-usuario.component';
 import { ArtesComponent } from './artes/artes.component';
+import { CarrinhoComponent } from './carrinho/carrinho.component';
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 
 const routes: Routes = [
@@ -33,8 +36,9 @@ const routes: Routes = [
             { path: 'temas/cadastro', component: CadastroTemaComponent },
             { path: 'artes', component: ArtesComponent },
             { path: 'artes/cadastro', component: CadastroArteComponent },
+            { path: 'carrinho', component: CarrinhoComponent, canActivate: [AuthGuard] },
 
-            { path: 'estilos/:id/edicao', component: EdicaoEstiloComponent },
+            { path: 'estilos/:id/edicao', component: EdicaoEstiloComponent, canActivate: [AdminGuard] },
             { path: 'artes/:id/edicao', component: EdicaoArteComponent },
             { path: 'artes/:id/edicao/imagens', component: EdicaoListaImagensArteComponent },
 
