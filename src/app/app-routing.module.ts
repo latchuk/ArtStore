@@ -27,7 +27,7 @@ const routes: Routes = [
         path: 'home', component: HomeComponent,
         children: [
 
-            // { path: '', redirectTo: 'estilos/cadastro', pathMatch: 'full' },
+            { path: '', redirectTo: 'artes', pathMatch: 'full' },
 
             { path: 'estilos/cadastro', component: CadastroEstiloComponent },
             { path: 'superficies/cadastro', component: CadastroSuperficieComponent },
